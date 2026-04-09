@@ -21,3 +21,27 @@ class Solution {
         return answer;
     }
 }
+
+import java.util.*;
+
+class Solution {
+    public int[] solution(int n) {
+        int[] answer = {};
+        List<Integer> list = new ArrayList<>();
+        
+        while (true) {
+            list.add(n);
+            
+            if (n == 1) break;
+            else if (n % 2 == 0) {
+                n /= 2;
+            } else {
+                n = n * 3 + 1;
+            }
+        }
+
+        answer = list.stream().mapToInt(Integer::intValue).toArray();
+        
+        return answer;
+    }
+}
