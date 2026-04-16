@@ -1,0 +1,39 @@
+// 프로그래머스: 큰 수 만들기  LV 2
+
+import java.util.*;
+
+class Solution {
+    public String solution(String number, int k) {
+        String answer = "";
+        Stack<Character> stack = new Stack<>();
+        for(int i=0; i<number.length(); i++) {
+            char c = number.charAt(i);
+            while(!stack.isEmpty() && k>0 && stack.peek()<c) { 
+                stack.pop();
+                k--;
+            } // 스택이 비어있고, k>0, 스택 맨 위의 값이 현재 숫자보다 작을때만 제거하고 k감소
+            stack.push(c);
+        }
+        
+        while(k>0) { // k는 반드시 써야함
+            stack.pop();
+            k--;
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        while(!stack.isEmpty()) {
+            sb.append(stack.pop());
+        }
+        
+        return sb.reverse().toString();
+    }
+}
+        
+        StringBuilder sb = new StringBuilder();
+        while(!stack.isEmpty()) {
+            sb.append(stack.pop());
+        }
+        
+        return sb.reverse().toString();
+    }
+}
