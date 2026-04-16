@@ -1,4 +1,3 @@
-// 시간 초과 --------------------------------------------------
 class Solution {
     public String solution(String number, int k) {
         String answer = "";
@@ -29,7 +28,8 @@ class Solution {
     }
 }
 
-// 시간 초과 해 --------------------------------------------------
+// 시간 초과 --------------------------------------------------
+
 class Solution {
     public String solution(String number, int k) {
         String answer = "";
@@ -61,3 +61,5 @@ class Solution {
         return answer;
     }
 }
+
+// 시간 초과 해결 --------------------------------------------------
