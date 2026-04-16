@@ -1,0 +1,24 @@
+import java.util.Arrays;
+
+class Solution {
+    public int solution(int[][] routes) {
+        int answer = 1;
+        //오름차순정렬
+        Arrays.sort(routes,(a, b) -> Integer.compare(a[0], b[0]));
+        //나가는 위치
+        int cam = routes[0][1];
+
+        for(int i =1; i< routes.length; i++){
+
+            //나간 위치보다 다음 거 들어온 위치가 크면 안 겹쳐서 새로 설치
+            if(routes[i][0] > cam){
+                answer++;
+                cam = routes[i][1];
+            }else if(routes[i][1] < cam){ // 다음 거 나간 위치가 작으면 카메라 이동
+                cam = routes[i][1];
+            }
+        }
+
+        return answer;
+    }
+}
