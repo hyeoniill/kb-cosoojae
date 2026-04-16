@@ -1,0 +1,39 @@
+// 프로그래머스 : 콜라문제
+// 난이도 : LV1
+
+import java.util.*;
+
+class Solution {
+    public int solution(int a, int b, int n) {
+        int answer = 0;
+        
+        while (n >= a) {
+            int change = (n / a) * b; // 교환으로 얻는 콜라 수
+            answer += change;         // 얻는 콜라 수 answer에 더하기
+            n = change + (n % a);     // n의 값을 '새 콜라 + 남은 병' 으로 변
+        }
+        
+        return answer;
+    }
+}
+
+
+import java.util.*;
+
+class Solution {
+    public int solution(int a, int b, int n) {
+        int answer = 0;
+        while(n>=a) {
+            if(n%a==0) {  
+                answer += n/a*b;  
+                n = n/a*b;  // 나누어 떨어질때는 모든병을 교환했으니 새로운 병만 남음
+            }
+            else if(n%a!=0) {   
+                int rest = n%a;
+                answer += n/a*b;
+                n = rest+n/a*b;  // 나누어 떨어지지않으면 남은 병 + 새로운 병
+            }
+        }
+        return answer;
+    }
+}
