@@ -36,7 +36,7 @@ class Solution {
                 // count + 1: 던전 하나 더 탐험
                 dfs(fatigue - dungeons[i][1], dungeons, count + 1);
 
-                // 🔥 백트래킹 (핵심)
+                // 백트래킹
                 // 다른 경우의 수를 탐색하기 위해 방문 상태를 되돌림
                 visited[i] = false;
             }
