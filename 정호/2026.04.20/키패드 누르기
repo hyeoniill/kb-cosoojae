@@ -1,0 +1,64 @@
+// 프로그래머스: 키패드 누르기 LV1
+
+import java.util.*;
+
+class Solution {
+    public String solution(int[] numbers, String hand) {
+        Map<Integer, int[]> map = new HashMap<>();
+        map.put(1, new int[]{0,0});
+        map.put(2, new int[]{0,1});
+        map.put(3, new int[]{0,2});
+        
+        map.put(4, new int[]{1,0});
+        map.put(5, new int[]{1,1});
+        map.put(6, new int[]{1,2});
+        
+        map.put(7, new int[]{2,0});
+        map.put(8, new int[]{2,1});
+        map.put(9, new int[]{2,2});
+        
+        int[] left = {3, 0};   // *, 왼손 시작지점
+        map.put(0, new int[]{3,1});
+        int[] right = {3, 2};  // #, 오른손 시작지점
+        
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i<numbers.length; i++) {
+            int[] target = map.get(numbers[i]);
+            
+            if(numbers[i]==1 || numbers[i]==4 || numbers[i]==7) { // 1,4,7일때는 무조건 왼쪽
+                sb.append("L");
+                left = target;
+            }
+            else if(numbers[i]==3 || numbers[i]==6 || numbers[i]==9) { // 3,6,9일때는 무조건 오른쪽
+                sb.append("R");
+                right = target;
+            }
+            
+            else { // 가운데일때
+                int left_dist = Math.abs(left[0]-target[0])+Math.abs(left[1]-target[1]);
+                int right_dist = Math.abs(right[0]-target[0])+Math.abs(right[1]-target[1]);
+                
+                if(left_dist<right_dist) {
+                    sb.append("L");
+                    left = target;
+                }
+                else if(left_dist>right_dist) {
+                    sb.append("R");
+                    right = target;
+                }
+                else { // 거리가 같은경우 
+                    if(hand.equals("right")) {
+                        sb.append("R");
+                        right = target;
+                    }
+                    else {
+                        sb.append("L");
+                        left = target;
+                    }
+                }
+            }
+        }
+        
+        return sb.toString();
+    }
+}
