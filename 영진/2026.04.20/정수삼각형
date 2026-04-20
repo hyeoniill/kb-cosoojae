@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int m = 0;
+int sum = 0;
+
+void sol(int h, vector<vector<int>> triangle,int idx){
+    if(h==triangle.size()){
+        m = max(m,sum);
+        return;
+    }
+    for(int i =0; i<=1; i++){
+        sum += triangle[h][idx];
+        sol(h+1,triangle,idx+i);
+        sum -= triangle[h][idx];
+    }
+}
+
+int solution(vector<vector<int>> triangle) {
+    
+    sol(0,triangle,0);
+    
+    return m;
+}
