@@ -1,29 +1,29 @@
-public String solution(int[] numbers, String hand) {
-        String answer = "";
-        StringBuilder sb = new StringBuilder();
-        // 숫자 키패드 누르는 순서 -> numbers
-        // 주손잡이 -> hand
-        String default_hand = ""; // 주 손잡이 저장
-        if (hand.equals("right")) {
-            default_hand = "R";
-        } else {
-            default_hand = "L";
+class Solution {
+    public int solution(int k, int[][] dungeons) {
+        int answer = 0;
+        boolean[] visited = new boolean[dungeons.length]; // 던전을 방문했는지 확인
+        int count = 0;
+        answer = dungeon(k, dungeons, visited, count);
+
+        return answer;
+    }
+
+    public int dungeon(int k, int[][] dungeons, boolean[] visited, int count) {
+        int maxCount = count; // 최대 방문 횟수
+
+        for (int i = 0; i < dungeons.length; i++) {
+            // 방문하지 않은 던전이고 피로도 조건을 충족했을 때
+            if (!visited[i] && k >= dungeons[i][0]) {
+                visited[i] = true; // 던전을 방문
+
+                // 재귀 호출 사용 : 피로도 소모하고, count 1 증가시켜서 다음 던전 탐색
+                // 여기서 나온 결과와 현재 maxCount 중 큰 값을 저장
+                int result = dungeon(k - dungeons[i][1], dungeons, visited, count + 1);
+                maxCount = Math.max(maxCount, result);
+
+                visited[i] = false; // 백트래킹 (방문 해제 : 다른 순서로 탐색하기 위해)
+            }
         }
-
-        // 왼손의 현재 위치 변수
-        Locate left = new Locate(3, 0); // * 위치
-        // 오른손의 현재 위치 변수
-        Locate right = new Locate(3, 2); // # 위치
-
-        // 비교할 2,4,6,8 의 좌표를 HashMap으로 저장
-        HashMap<Integer, int[]> num_map = new HashMap<>();
-        num_map.put(2, new int[] { 0, 1 });
-        num_map.put(5, new int[] { 1, 1 });
-        num_map.put(8, new int[] { 2, 1 });
-        num_map.put(0, new int[] { 3, 1 });
-        num_map.put(1, new int[] { 0, 0 });
-        num_map.put(4, new int[] { 1, 0 });
-        num_map.put(7, new int[] { 2, 0 });
-        num_map.put(3, new int[] { 0, 2 });
-        num_map.put(6, new int[] { 1, 2 });
-        num_map.put(9, new int[] { 2, 2 });
+        return maxCount;
+    }
+}
