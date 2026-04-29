@@ -1,0 +1,35 @@
+import java.util.PriorityQueue;
+
+class Solution {
+    public int solution(int[] scoville, int K) {
+        int answer = 0; 
+
+        // 큐 선언 ai활용 함
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        // 배열 모든값 큐에 넣
+        for (int s : scoville) {
+            pq.offer(s);
+        }
+
+        // 가장 작은 값이 K 이상이 될 때까지 반복
+        while (pq.peek() < K) {
+            if (pq.size() < 2) {
+                return -1;
+            }
+
+            // 가장 안매운 음식 두개
+            int first = pq.poll();
+            int second = pq.poll();
+
+            // 섞은 음식
+            int mixed = first + (second * 2);
+
+            // 다시 넣
+            pq.offer(mixed);
+            answer++;
+        }
+
+        return answer;
+    }
+}
