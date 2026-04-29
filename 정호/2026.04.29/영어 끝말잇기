@@ -1,0 +1,28 @@
+// 프로그래머스: 영어 끝말잇기 LV 1
+
+import java.util.*;
+
+class Solution {
+    public int[] solution(int n, String[] words) {
+        int[] answer = new int[2];
+        HashSet<String> set = new HashSet<>();
+        
+        set.add(words[0]);
+        char last = words[0].charAt(words[0].length() - 1); // 처음 단어의 끝 알파벳
+        
+        for(int i = 1; i < words.length; i++) {
+            char start = words[i].charAt(0); // 단어의 첫번째 알파벳(i=1 이라서 두번째 단어부터 시작함)
+            
+            if(set.contains(words[i]) || last != start) { // 이미 있는 단어를 말하거나, 끝 알파벳과 그 다음의 시작 알파벳이 다른 경우 
+                answer[0] = (i % n) + 1;
+                answer[1] = (i / n) + 1;
+                break;
+            }
+            
+            set.add(words[i]);
+            last = words[i].charAt(words[i].length() - 1); // 맨 끝 알파벳 업데이트
+        }
+        
+        return answer;
+    }
+}
