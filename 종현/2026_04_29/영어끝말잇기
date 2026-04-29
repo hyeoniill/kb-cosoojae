@@ -1,0 +1,41 @@
+## 영어 끝말잇기 No.12981
+
+```java
+import java.util.*;
+
+class Solution {
+    public int[] solution(int n, String[] words) {
+        int[] answer = {0, 0};
+        //이미 나온 단어 저장용, 순서는 필요 없기 때문에 SET
+        Set<String> set = new HashSet<>();
+
+        //처음 오는 문자에 대해서는 길이만 체크하면 됨
+        String currentWord = words[0];
+        if(currentWord.length() == 1) {
+            return answer;
+        } else {
+            set.add(currentWord);
+        }
+
+        /*2번째 낱말부터 체크
+          길이가 1인지
+          이전 단어의 끝 글자와 현재 단어의 첫 글자가 일치하는지
+          set에 포함되었는지(이미 나왔는지)
+        */
+        for(int i=1; i<words.length; i++) {
+            currentWord = words[i];
+            if(currentWord.length() == 1 || currentWord.charAt(0) != words[i-1].charAt(words[i-1].length()-1) || set.contains(currentWord)) {
+                // 순서 계산
+                answer[0] = (i%n)+1;
+                // 라운드 계산
+                // index가 0부터 있기 때문에 (i/n)+1로 순서를 해도 9번째=8번이므로 가능
+                answer[1] = (i/n)+1;
+                break;
+            }
+                set.add(currentWord);    
+        }
+
+        return answer;
+    }
+}
+```
