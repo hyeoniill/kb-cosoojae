@@ -1,0 +1,42 @@
+// 프로그래머스 게임 맵 최단거리 LV2
+
+import java.util.*;
+
+class Solution {
+    public int solution(int[][] maps) {
+        int[] dx = {-1,1,0,0};
+        int[] dy = {0,0,-1,1};  // 4방향(상,하,좌,우)
+        
+        int height = maps.length;
+        int width = maps[0].length;
+        boolean[][] visited = new boolean[height][width];
+        
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[] {0,0});  // 시작점 넣기
+        visited[0][0] = true;      // 시작점은 방문했으니 true
+        
+        while(!q.isEmpty()) {
+            int[] now = q.poll();
+            int x = now[0];
+            int y = now[1];
+            if(now[0] == height-1 && now[1] == width-1) { // 현재 지점이 우측하단일때 값 리턴 
+                return maps[height-1][width-1];
+            }
+            
+            for(int i=0; i<4; i++) {
+                int nx = now[0] + dx[i];
+                int ny = now[1] + dy[i];
+                
+                if(nx>=0 && ny>=0 && nx<height && ny<width) { // nx,ny는 지금 점을 기준으로 4방향 탐색한곳이고, 맵을 넘어가지않게 기준 정하기
+                    if(maps[nx][ny]==1 && !visited[nx][ny]) { // 탐색한 칸이 1이고 방문하지 않은곳일떄 
+                        maps[nx][ny] = maps[x][y]+1;
+                        visited[nx][ny] = true;
+                        q.offer(new int[]{nx,ny});
+                    }
+                }
+            }
+        }
+
+        return -1;
+    }
+}
