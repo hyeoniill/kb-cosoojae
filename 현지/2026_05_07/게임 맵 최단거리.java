@@ -29,7 +29,12 @@ class Solution {
             // 위로 가기
             int nx1 = x + dx[0];
             int ny1 = y + dy[0];
-            if (nx1 >= 0 && nx1 < n && ny1 >= 0 && ny1 < m && maps[nx1][ny1] == 1) {
+            boolean canGo1 = nx1 >= 0;
+            canGo1 = canGo1 && nx1 < n;
+            canGo1 = canGo1 && ny1 >= 0;
+            canGo1 = canGo1 && ny1 < m;
+            canGo1 = canGo1 && maps[nx1][ny1] == 1;
+            if (canGo1) {
                 maps[nx1][ny1] = 0;
                 queue.add(new int[]{nx1, ny1, distance + 1});
             }
@@ -37,7 +42,12 @@ class Solution {
             // 아래로 가기
             int nx2 = x + dx[1];
             int ny2 = y + dy[1];
-            if (nx2 >= 0 && nx2 < n && ny2 >= 0 && ny2 < m && maps[nx2][ny2] == 1) {
+            boolean canGo2 = nx2 >= 0;
+            canGo2 = canGo2 && nx2 < n;
+            canGo2 = canGo2 && ny2 >= 0;
+            canGo2 = canGo2 && ny2 < m;
+            canGo2 = canGo2 && maps[nx2][ny2] == 1;
+            if (canGo2) {
                 maps[nx2][ny2] = 0;
                 queue.add(new int[]{nx2, ny2, distance + 1});
             }
@@ -45,7 +55,12 @@ class Solution {
             // 왼쪽으로 가기
             int nx3 = x + dx[2];
             int ny3 = y + dy[2];
-            if (nx3 >= 0 && nx3 < n && ny3 >= 0 && ny3 < m && maps[nx3][ny3] == 1) {
+            boolean canGo3 = nx3 >= 0;
+            canGo3 = canGo3 && nx3 < n;
+            canGo3 = canGo3 && ny3 >= 0;
+            canGo3 = canGo3 && ny3 < m;
+            canGo3 = canGo3 && maps[nx3][ny3] == 1;
+            if (canGo3) {
                 maps[nx3][ny3] = 0;
                 queue.add(new int[]{nx3, ny3, distance + 1});
             }
@@ -53,7 +68,12 @@ class Solution {
             // 오른쪽으로 가기
             int nx4 = x + dx[3];
             int ny4 = y + dy[3];
-            if (nx4 >= 0 && nx4 < n && ny4 >= 0 && ny4 < m && maps[nx4][ny4] == 1) {
+            boolean canGo4 = nx4 >= 0;
+            canGo4 = canGo4 && nx4 < n;
+            canGo4 = canGo4 && ny4 >= 0;
+            canGo4 = canGo4 && ny4 < m;
+            canGo4 = canGo4 && maps[nx4][ny4] == 1;
+            if (canGo4) {
                 maps[nx4][ny4] = 0;
                 queue.add(new int[]{nx4, ny4, distance + 1});
             }
