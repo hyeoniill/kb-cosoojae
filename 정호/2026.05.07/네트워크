@@ -1,0 +1,29 @@
+// 프로그래머스 네트워크 LV3
+
+import java.util.*;
+
+class Solution {
+    static boolean[] visited;
+    public int solution(int n, int[][] computers) {
+        visited = new boolean[n];
+        int count = 0;
+        for(int i=0; i<n; i++) {
+            if(!visited[i]) {   // 방문 하지않은 곳이라면 dfs 실행, count++
+                dfs(computers, i);
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    static void dfs(int[][] computers, int now) {
+        visited[now] = true; // 현재 방문한곳을 true로 표시
+        
+        for(int i=0; i<computers.length; i++) {
+            if(computers[i][now] == 1 && !visited[i] ) { // 현재 위치가 1이고 방문하지 않았으면 
+                visited[i] = true;
+                dfs(computers, i);
+            }
+        }
+    }
+}
