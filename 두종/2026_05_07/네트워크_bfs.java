@@ -1,0 +1,55 @@
+import java.util.*;
+
+class Solution {
+    static int[][] computers;
+    static boolean[] visited;
+    static ArrayList<Integer>[] adj_list;
+
+    public int solution(int n, int[][] computers) {
+        // 연결 요소의 개수 구하기
+        Solution.computers = computers;
+        visited = new boolean[n];
+        int answer = 0;
+
+        // ArrayList들로 이루어진 배열 초기화
+        adj_list = new ArrayList[n];
+        for (int i = 0; i < n; i++) {
+            adj_list[i] = new ArrayList<Integer>();
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (computers[i][j] == 1) {
+                    adj_list[i].add(j); //인접 노드 업데이트
+                }
+            }
+        }
+
+        // bfs를 활용해서 같은 네트워크 상의 노드는 visited로 표시
+        // 따라서 새로운 노드를 탐색하게 된다면 새로운 네트워크 이므로 answer++
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]) {
+                answer++;
+                bfs(i);
+            }
+        }
+
+        return answer;
+    }
+
+    public static void bfs(int start) {
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.offer(start);
+        visited[start] = true;
+
+        while (!queue.isEmpty()) {
+            int node = queue.poll();
+            for (int nextNode : adj_list[node]) {
+                if (!visited[nextNode]) {
+                    visited[nextNode] = true;
+                    queue.offer(nextNode);
+                }
+            }
+        }
+    }
+}
