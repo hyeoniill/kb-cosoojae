@@ -1,0 +1,28 @@
+import java.util.*;
+
+
+
+class Solution {
+    int[] visited = new int[200];
+    
+    public void go(int i,int[][] computers){
+        visited[i] = 1;
+        for(int j =0; j<computers.length; j++){
+            if(computers[i][j] == 0 || visited[j] !=0) continue;
+            go(j,computers);
+        }
+    }
+    public int solution(int n, int[][] computers) {
+        int count = 0;
+        for(int i =0; i<n; i++){
+            if(visited[i] ==0) {
+                    count++;    
+                    go(i, computers);
+                };
+        }
+        
+        return count;
+    }
+
+
+}
