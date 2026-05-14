@@ -1,0 +1,74 @@
+class Solution {
+
+    public int solution(String s) {
+
+        int answer = s.length();
+
+        // 몇 글자씩 자를지
+        for (int cut = 1; cut <= s.length() / 2; cut++) {
+
+            String result = "";
+
+            // 이전 문자
+            String prev = "";
+
+            // 같은 개수
+            int count = 1;
+
+            // cut 단위로 자르기
+            for (int i = 0; i < s.length(); i += cut) {
+
+                int end = i + cut;
+
+                // 범위 초과 방지
+                if (end > s.length()) {
+                    end = s.length();
+                }
+
+                String now = s.substring(i, end);
+
+                // 첫 번째 문자열 저장
+                if (prev.equals("")) {
+                    prev = now;
+                    continue;
+                }
+
+                // 이전이랑 같으면 개수 증가
+                if (prev.equals(now)) {
+                    count++;
+                }
+
+                // 다르면 result에 저장
+                else {
+
+                    // 2개 이상 반복이면 숫자 붙이기
+                    if (count > 1) {
+                        result += count;
+                    }
+
+                    result += prev;
+
+                    // 새 문자열로 변경
+                    prev = now;
+
+                    // 개수 초기화
+                    count = 1;
+                }
+            }
+
+            // 마지막 처리
+            if (count > 1) {
+                result += count;
+            }
+
+            result += prev;
+
+            // 가장 짧은 길이 저장
+            if (result.length() < answer) {
+                answer = result.length();
+            }
+        }
+
+        return answer;
+    }
+}
