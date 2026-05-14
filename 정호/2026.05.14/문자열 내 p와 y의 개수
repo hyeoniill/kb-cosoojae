@@ -1,0 +1,22 @@
+// 프로그래머스 
+// 문자열 내 p와 y의 개수 LV1
+
+class Solution {
+    boolean solution(String s) {
+        int count_p = 0;
+        int count_y = 0;
+        
+        boolean answer = false;
+        for(int i=0; i<s.length(); i++) {
+            char c = s.charAt(i);
+            if(c=='p' || c=='P')  // 대문자, 소문자 p일때 count_p증가
+                count_p++;
+            else if(c=='Y' || c=='y')  // 대문자, 소문자 y일때 count_y증가
+                count_y++;
+        }
+        
+        if(count_p==count_y)
+            return true;
+        return answer;
+    }
+}
