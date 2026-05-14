@@ -1,0 +1,34 @@
+class Solution {
+
+    boolean solution(String s) {
+
+        int pCount = 0;
+        int yCount = 0;
+
+        // 대문자 -> 소문자
+        s = s.toLowerCase();
+
+        for (int i = 0; i < s.length(); i++) {
+
+            char c = s.charAt(i);
+
+            // p 개수 카운트
+            if (c == 'p') {
+                pCount++;
+            }
+
+            // y 개수 카운트
+            if (c == 'y') {
+                yCount++;
+            }
+        }
+
+        // 개수가 같으면 true
+        return pCount == yCount;
+    }
+}
+
+
+
+
+
