@@ -1,0 +1,35 @@
+// 프로그래머스 - 연속된 부분 수열의 합 LV2
+
+class Solution {
+    public int[] solution(int[] sequence, int k) {
+        int[] answer = new int[2];
+        int sum = 0;
+        int start = 0;
+        int end = sequence.length;
+        int minlen = sequence.length;
+        
+        for(int i=0; i<end; i++) {
+            sum += sequence[i];
+            
+            // 합이 k보다 크면
+            // 시작 포인터를 이동시키면서 합 줄이기
+            while(sum>k) {
+                sum -= sequence[start];
+                start++;
+            }
+            
+            if(sum==k) {
+                if(i - start < minlen) {
+                    // 현재 구간 길이가 기존 최소 길이보다 짧은 경우, 최소길이 갱신
+                    minlen = i - start;
+
+                    answer[0] = start;
+                    answer[1] = i;
+                }
+            }
+            
+            
+        }
+        return answer;
+    }
+}
