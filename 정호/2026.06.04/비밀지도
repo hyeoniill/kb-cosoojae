@@ -1,0 +1,35 @@
+// 프로그래머스 LV2 비밀지도
+
+import java.util.*;
+
+class Solution {
+    public String[] solution(int n, int[] arr1, int[] arr2) {
+        String[] answer = new String[n];
+        
+        for(int i=0; i<n; i++) {
+            // 10진수 -> 2진수 변환(toBinaryString)
+            String a = Integer.toBinaryString(arr1[i]);
+            String b = Integer.toBinaryString(arr2[i]);
+            
+            // a,b 길이 n으로 맞추기(0추가)
+            while(a.length() < n) {
+                a = "0" + a;
+            }
+            while(b.length() < n) {
+                b = "0" + b;
+            }
+            
+            StringBuilder sb = new StringBuilder();
+            for(int j=0; j<n; j++) {
+                // 두 지도 모두 0이면 빈 공간
+                if(a.charAt(j)=='0' && b.charAt(j)=='0')
+                    sb.append(" ");
+                else
+                    sb.append("#");
+            }
+            answer[i] = sb.toString();
+        }
+        
+        return answer;
+    }
+}
