@@ -16,7 +16,7 @@ class Solution {
         }
 
         int busTime = 540; // 첫 버스 도착시간 09:00
-        int answerTime = 0;
+        int answerTime = 0; // 콘이 도착해야 하는 최종 시간
 
         // 셔틀버스 운영횟수만큼 반복
         for (int i = 0; i < n; i++) {
