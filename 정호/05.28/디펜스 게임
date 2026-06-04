@@ -1,0 +1,28 @@
+// 프로그래머스 LV2
+
+import java.util.*;
+
+class Solution {
+    public int solution(int n, int k, int[] enemy) {
+        int answer = 0;
+        // 우선순위 큐를 오름차순으로 큰 값부터 자동 정렬 
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        
+        for(int i=0; i<enemy.length; i++) {
+            pq.add(enemy[i]);
+            n -= enemy[i];
+            answer++;
+            
+            if(n<0 && k>0) {// 병사가 음수가 되고 무적권이 남아있을때, 제일 큰값에 무적권을 사용하고 그 값만큼 병사수를 더하기 
+                int num = pq.poll();
+                n += num;
+                k--;
+            }
+            else if(n<0 && k<=0){// 병사가 음수이고 무적권이 없을 때, 라운드--
+                answer--;
+                break;
+            }
+        }
+        return answer;
+    }
+}
