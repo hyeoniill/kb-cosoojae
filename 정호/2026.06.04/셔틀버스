@@ -35,7 +35,7 @@ class Solution {
             // 마지막 버스인 경우
             if (i == n - 1) {
 
-                // 자리가 남아있으면 버스 도착 시간에 와도 탑승가능(09:00)
+                // 자리가 남아있으면 버스 도착 시간에 와도 탑승가능
                 if (count < m) {
                     answerTime = busTime;
                 }
