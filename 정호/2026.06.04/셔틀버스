@@ -1,0 +1,71 @@
+// 프로그래머스 LV3 셔틀버스
+
+import java.util.*;
+
+class Solution {
+    public String solution(int n, int t, int m, String[] timetable) {         
+        // 마지막 버스가 비어 있으면 버스 시간, 만석이면 마지막 탑승자 시간 - 1분, 시간을 분 단위로 바꾸기 
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        for (String time : timetable) {
+            String[] temp = time.split(":");
+            int minute = Integer.parseInt(temp[0]) * 60
+                    + Integer.parseInt(temp[1]);
+
+            pq.offer(minute);
+        }
+
+        int busTime = 540; // 첫 버스 도착시간 09:00
+        int answerTime = 0; // 콘이 도착해야 하는 최종 시간
+
+        // 셔틀버스 운영횟수만큼 반복
+        for (int i = 0; i < n; i++) {
+
+            int count = 0;     // 현재 버스 탑승 인원
+            int lastCrew = 0;  // 마지막으로 탑승한사람 시간
+
+            while (!pq.isEmpty()
+                    && pq.peek() <= busTime
+                    && count < m) {
+
+                lastCrew = pq.poll();
+                count++;
+            }
+
+            // 마지막 버스인 경우
+            if (i == n - 1) {
+
+                // 자리가 남아있으면 버스 도착 시간에 와도 탑승가능
+                if (count < m) {
+                    answerTime = busTime;
+                }
+                // 만석일때, 마지막 탑승자보다 1분 먼저 도착 
+                else {
+                    answerTime = lastCrew - 1;
+                }
+            }
+
+            busTime += t;
+        }
+
+        int hour = answerTime / 60;
+        int minute = answerTime % 60;
+
+        String hh;
+        String mm;
+
+        if (hour < 10) {
+            hh = "0" + hour;
+        } else {
+            hh = String.valueOf(hour);
+        }
+
+        if (minute < 10) {
+            mm = "0" + minute;
+        } else {
+            mm = String.valueOf(minute);
+        }
+
+        return hh + ":" + mm;
+    }
+}
