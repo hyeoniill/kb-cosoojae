@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int solution(int cacheSize, vector<string> cities) {
+    int answer = 0;
+   
+    if(cacheSize == 0 ) return 5*cities.size();
+    list<string> l;
+    for(string city : cities){
+        string s ="";
+        for(char c : city){
+            s += tolower(c);
+        }
+        auto it = find(l.begin(),l.end(),s);
+        if(it != l.end()){
+            l.erase(it);
+            l.push_back(s);
+            answer +=1;
+            continue;
+        }
+        //없는 경우
+        if(l.size() == cacheSize) l.pop_front();
+        
+        l.push_back(s);
+        answer+=5;
+        
+    }
+    return answer;
+}
