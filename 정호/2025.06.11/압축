@@ -1,0 +1,38 @@
+// 프로그래머스  Lv2 압축
+
+import java.util.*;
+
+class Solution {
+    public int[] solution(String msg) {
+        HashMap<String, Integer> map = new HashMap<>();
+        int start = 1;
+        for(char c = 'A'; c<='Z'; c++) {   // A ~ Z를 1 ~ 26번으로 초기화
+            map.put(String.valueOf(c), start++);
+        }
+        
+        ArrayList<Integer> list = new ArrayList<>();
+        int i=0;
+        
+        while(i<msg.length()) {
+            String w = "";  // 현재 가장 긴 문자열 저장
+            int j = i;
+            while(j<msg.length() && map.containsKey(w+msg.charAt(j))) {  // 사전에 존재하는 가장 긴 문자열 찾기
+                w += msg.charAt(j);
+                j++;
+            }
+            
+            list.add(map.get(w));  
+            if(j<msg.length()) {
+                map.put(w+msg.charAt(j), start++);
+            }
+            i += w.length();
+        }
+        
+        int[] arr = new int[list.size()];
+        for(int k=0; k<list.size(); k++) {
+            arr[k] = list.get(k);
+        }
+        
+        return arr;
+    }
+}
