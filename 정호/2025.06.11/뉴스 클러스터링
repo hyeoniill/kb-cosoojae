@@ -1,0 +1,52 @@
+// 프로그래머스 LV2 뉴스 클러스터링
+
+import java.util.*;
+
+class Solution {
+    public int solution(String str1, String str2) {
+        HashMap<String, Integer> map1 = new HashMap<>();
+        HashMap<String, Integer> map2 = new HashMap<>();
+        
+        for (int i = 0; i < str1.length() - 1; i++) { // 1,2번째가 모두 알파벳일때만 대문자로 변경해서 추가
+            String word = str1.substring(i, i + 2);
+            if (Character.isLetter(word.charAt(0)) && Character.isLetter(word.charAt(1))) {
+                word = word.toUpperCase();
+                map1.put(word, map1.getOrDefault(word, 0) + 1);
+            }
+        }
+
+        for (int i = 0; i < str2.length() - 1; i++) {
+            String word = str2.substring(i, i + 2);
+            if (Character.isLetter(word.charAt(0)) && Character.isLetter(word.charAt(1))) {
+                word = word.toUpperCase();
+                map2.put(word, map2.getOrDefault(word, 0) + 1);
+            }
+        }
+
+        // 3. 교집합 계산
+        int same = 0;
+        for (String w : map1.keySet()) {
+            if (map2.containsKey(w)) {
+                same += Math.min(map1.get(w), map2.get(w));
+            }
+        }
+
+        // 4. 전체 개수 합 (A+B)
+        int count1 = 0;
+        int count2 = 0;
+
+        for (String w : map1.keySet()) {
+            count1 += map1.get(w);
+        }
+
+        for (String w : map2.keySet()) {
+            count2 += map2.get(w);
+        }
+
+        int whole = count1 + count2 - same;  // 합집합 공식 A ∪ B =  A + B - A ∩ B
+
+        
+        if (whole == 0) return 65536;
+        return (int) ((double) same / whole * 65536);
+    }
+}
