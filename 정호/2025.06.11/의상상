@@ -1,0 +1,19 @@
+// 프로그래머스 LV2 의상
+
+import java.util.*;
+
+class Solution {
+    public int solution(String[][] clothes) {
+        int answer = 0;
+        HashMap<String, Integer> map = new HashMap<>();
+        for(int i=0; i<clothes.length; i++) {
+            map.put(clothes[i][1], map.getOrDefault(clothes[i][1], 0)+1);
+        }
+        
+        int sum = 1;
+        for(int c : map.values()) { // 입지않는경우 1개 + 해당 종류 의상 개수
+            sum *= (c+1);
+        }
+        return sum-1;
+    }
+}
