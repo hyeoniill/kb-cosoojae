@@ -1,0 +1,20 @@
+// 프로그래머스 LV2 H-index
+
+class Solution {
+    public int solution(int[] citations) {
+        int answer = 0;
+        int len = citations.length;
+        for(int i=0; i<=len; i++) {  // H-index가 될 수 있는 값 i를 0부터 논문 개수까지 확인(최댓값이 논문 개수라서)
+            int count = 0;
+            for(int j=0; j<len; j++) {
+                if(citations[j]>=i)
+                    count++;
+            }
+            
+            if(count>=i && answer<i)  // 인용 횟수가 i 이상인 논문이 i편 이상 존재하면 후보가 됨, 그중 가장 큰 값을 저장
+                answer = i;
+                
+        }
+        return answer;
+    }
+}
